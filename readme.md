@@ -107,13 +107,12 @@ nano crudRouter.js
 const express = require('express');
 
 // Instanciar o Router na variavel Router
-const router = express.Router();
+const router = Router();
+const { listarDados } = require('../controllers
+controller')
 
-//Criando rota geta
-router.get('/api', (request, response) => {
-    response.send('Retorno de informações de banco de dados');
-    response.log('get');
-});
+
+router.get('/api', listarDados);
 
 router.post('/api', (request, response) => {
     response.send('Metodo utilizado para salvar informações!');
@@ -148,4 +147,17 @@ mkdir src/controllers
 ### Criar arquivo controller.js
 ````
 touch src/controllers/controller.js
+````
+
+### Criar função para processar as requisições das rotas
+
+````
+function listarDados(request, response) {
+    response.send('Retorno de lista de informações de banco de dados');
+    console.log('get');
+}; 
+
+exports.module = {
+    listarDados
+}
 ````

@@ -1,12 +1,11 @@
 // Importar pacote do express
-const express = require('express');
+const { Router } = require('express');
 // Instanciar o Router na variavel Router
-const router = express.Router();
+const router = Router();
+// Importar função do controller para acessar as funções
+const { listarDados } = require('../controllers/controller')
 
-router.get('/api', (request, response) => {
-    response.send('Retorno de informações de banco de dados');
-    response.log('get');
-});
+router.get('/api', listarDados);
 
 router.post('/api', (request, response) => {
     response.send('Metodo utilizado para salvar informações!');
