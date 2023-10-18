@@ -1,10 +1,8 @@
 // Importar pacote do express
 const express = require('express');
-
 // Instanciar o Router na variavel Router
 const router = express.Router();
 
-//Criando rota geta
 router.get('/api', (request, response) => {
     response.send('Retorno de informações de banco de dados');
     response.log('get');
