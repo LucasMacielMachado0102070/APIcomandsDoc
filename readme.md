@@ -106,58 +106,49 @@ nano crudRouter.js
 // Importar pacote do express
 const express = require('express');
 
+/// Importar pacote do express
+const { Router } = require('express');
 // Instanciar o Router na variavel Router
 const router = Router();
-const { listarDados } = require('../controllers
-controller')
+// Importar função do controller para acessar as funções
+const { 
+    listarDados,
+    gravarDados,
+    atualizarDados,
+    deletarDados
+} = require('../controllers/controller')
 
+router.get('/listar', listarDados);
 
-router.get('/api', listarDados);
+router.post('/gravar', gravarDados);
 
-router.post('/api', (request, response) => {
-    response.send('Metodo utilizado para salvar informações!');
-    response.log('post');
-});
+router.put('/atualizar/:id', atualizarDados);
 
-router.put('/api/:id', (request, response) => {
-    response.send('Metodo utilizado para salvar informações!');
-    response.log('put');
-});
-
-router.delete('/api/:id', (request, response) => {
-    response.send('Metodo utilizado para salvar informações!');
-    response.log('delete');
-});
+router.delete('/deletar/:id', deletarDados)
 
 module.exports = router;
-
 ````
 
-
-### CRIAÇÃO DE CONTROLES
-* Arquivos para processar as requisições das rotas
-
-<hr>
-
-### Criar pasta de controllers
-`````
-mkdir src/controllers
-````
-
-### Criar arquivo controller.js
-````
-touch src/controllers/controller.js
-````
-
-### Criar função para processar as requisições das rotas
-
-````
 function listarDados(request, response) {
     response.send('Retorno de lista de informações de banco de dados');
-    console.log('get');
-}; 
+}
 
-exports.module = {
-    listarDados
+function gravarDados(request, response) {
+    response.send('Metodo utilizado para salvar informações!');
+}
+
+function atualizarDados(request, response) {
+    response.send('Metodo utilizado para salvar informações!');
+}
+
+function deletarDados(request, response) {
+    response.send('Metodo utilizado para salvar informações!');
+}
+
+module.exports = {
+    listarDados,
+    gravarDados,
+    atualizarDados,
+    deletarDados,
 }
 ````

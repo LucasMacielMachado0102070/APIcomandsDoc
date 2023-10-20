@@ -5,13 +5,16 @@ const express = require('express');
 const app = express();
 
 // Importar as rotas para serem executadas na aplicação
-const router = require('./routes/crudRouter');
+const crudRouter = require('./routes/crudRouter');
 
 // Importar o pacote detenv
 const dotenv = require('dotenv').config();
 
+// HABILITAR A UTILIZAÇÃO DO CRUDROUTER
+app.use('/api', crudRouter);
+
 // Setar a porta do servidor, a partir do arquivo .env
 app.set('port', process.env.PORT);
 
-// Exportar as configurações do app para outros arquivos acessarem
+// Exportar as configura ções do app para outros arquivos acessarem
 module.exports = app;
