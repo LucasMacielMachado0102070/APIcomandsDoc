@@ -26,7 +26,7 @@ touch .env
 ***
 instalar pacotes da API
 ***
-npm i axpress nodemom dotenv
+npm i axpress nodemom dotenv mysql2
 ***
 * express: será o servidor da api
 * nodmon: atualizar os arquivos alterados sem parar o servidor
@@ -81,28 +81,28 @@ touch src/app.js
 
 ## Criar o arquivo .env e o .env.example
 
-````
+```
 touch .env
-````
+```
 * Criar arquivo para salvar as variáveis necessárias da aplicação sem os valores
-````
+```
 touch .env.example
-````
+```
 
 * Criar pasta routes
-````
+```
 mkdir routes
-````
+```
 * Criar arquivo crudRouter.js dentro da pasta routes
-````
+```
 nano crudRouter.js
-````
+```
 ### Ctrl + O: Salvar o arquivo
 ### Enter: Confirmar nome do arquivo
 ### Ctrl + X: Fechar o arquivo
 
 * Digitar o código no arquivo criado
-````
+```
 // Importar pacote do express
 const express = require('express');
 
@@ -127,7 +127,7 @@ router.put('/atualizar/:id', atualizarDados);
 router.delete('/deletar/:id', deletarDados)
 
 module.exports = router;
-````
+```
 
 function listarDados(request, response) {
     response.send('Retorno de lista de informações de banco de dados');
@@ -151,4 +151,43 @@ module.exports = {
     atualizarDados,
     deletarDados,
 }
-````
+```
+
+<hr>
+
+### Configurar estrutura de conexão com banco de dados
+
+### Criar pasta 'config' dentro da pasta 'src'
+```
+mkdir src/config
+```
+### Criar arquivo 'db.js' dentro da pasta 'config'
+```
+touch src/config/db.js
+```
+### Colar o código no arquivo 'db.js'
+```
+// Importanto o pacote de conexão com banco de dados
+const mysql = require('mysql2');
+// Importar variaveis de conexão do banco
+require('dotenv').config();
+
+console.log(process.env.DB_HOST);
+
+const connection = mysql.createConnection({
+    host: process.env.DB_HOSt,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    datebase: process.env.DB_DATABASE
+});
+
+connection.connect( (err) => {
+    if (err) {
+        console.log('Erro de conexão: ' + err);
+    } else {
+        console.log('Mysql Connected!');
+    }
+});
+
+module.exports = connection;
+```
