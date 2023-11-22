@@ -60,7 +60,32 @@ connection.query(query, params, (err, results) => {
 })
 }
 
+async function update (request, response) {
+    // Comando Sql
+    const query = "UPDATE alunos = ?, dt_nascimento = ?, time_do_coracao = ? WHERE id = ?";
+
+    const params = Array(
+        request.body.nome,
+        request.body.dt_nascimente,
+        request.body.time_do_coracao,
+        request.params.id
+    )
+
+    connection.query(query, params, (err, results) => {
+        if (results) {
+            response
+                .status(200)
+                .json({
+                    sucess: true,
+                    message: "Aluno atualizado com sucesso",
+                    data: results
+                })
+        }
+    })
+}
+
 module.exports = {
     listarUsuarios,
-    cadastrarAluno
-}
+    cadastrarAluno,
+    update
+};
