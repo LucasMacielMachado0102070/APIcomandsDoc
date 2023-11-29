@@ -1,74 +1,79 @@
-### Documentação da API
+# Documentação para construção da API
+* Escolher local do computador para criar a pasta do projeto
 * abrir no terminal do gitbash
-Definir local do computador para criar a pasta do projeto
-***
+
+```
 mkdir Nome_do_Projeto
-***
+```
 Acessar a pasta do projeto
-***
+```
 cd Nome_Projeto
-***
+```
 Abrir pasta no vscode
-***
+```
 code .
-***
-Iniciar o gerenciador de pacotes Node
-***
+```
 npm init -y
-***
-Criar arquivo .gitignore: arquivos e pastas que não vão para o github
-***
-touch .gitignore
-***
-Criar arquivo .env: armazenará as variáveis do ambiente
-***
-touch .env
-***
-instalar pacotes da API
-***
-npm i axpress nodemom dotenv mysql2
-***
+```
+* Cria o arquivo package.json para gerenciar os pacotes da aplicação
+```
+# Instalar pacotes da API
+```
+npm i express nodemon dotenv mysql2
+```
 * express: será o servidor da api
 * nodmon: atualizar os arquivos alterados sem parar o servidor
 * dotenv: gerenciador de variáveis de ambiente
+* mysql2: integrar a api com o banco de dados
 
+Criar arquivo .gitignore: arquivos e pastas que não vão para o github
+```
+touch .gitignore
+```
+* Arquivo responsável por ignorar arquivos e pastas
+```
+Criar arquivo .env: armazenará as variáveis do ambiente
+```
+touch .env
+```
 informar arquivos e pastas no .gitignore
-***
+```
 node_modules
+```
 .env
-***
+```
 Criar pasta src para estrutura do projeto
 ***
 mkdir src
-***
+```
+* Pasta responsável por organizar a estrutura da aplicação
+```
 Criar arquivo server.js na pasta src
-***
+```
 touch src/server.js
-***
-Configurar o servidor
-***
-// Importar pacote do express
-const express = require('express');
-// Instanciar o express na variavel app
-const app = express();
-// Importar um pacote dotenv
-const dotenv = require('dotenv').config();
-// defnir a porta do servidor
-const PORT = process.env.PORT || 3005;
+```
+* Arquivo responsável por rodar a aplicação 
+
+Colar o código de configuração no arquivo 'server.js'
+```
+// Importar o arquivo de configuração
+const app = require('./app');
+// Importar a porta do servidor
+const PORT = app.get('port');
 
 // Testar servidor 
 app.listen(PORT, () => console.log(`Running at port ${PORT}`))
-***
+```
 
 Criar comando para o servidor
-***
+```
 "start":"nodemon src/server.js"
-***
+```
 
 Rodar o comando no terminal com GitBash
-***
+```
 npm run star
-***
+```
 
 ### Criar estrutura para o projeto
 
@@ -84,7 +89,7 @@ touch src/app.js
 ```
 touch .env
 ```
-* Criar arquivo para salvar as variáveis necessárias da aplicação sem os valores
+*** Criar arquivo para salvar as variáveis necessárias da aplicação sem os valores
 ```
 touch .env.example
 ```
