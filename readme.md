@@ -36,6 +36,29 @@ Criar arquivo .env: armazenará as variáveis do ambiente
 ```
 touch .env
 ```
+
+Criar arquivo .env.example
+```
+touch .env.example
+```
+* Arquivo responsável por definir as variáveis de ambiente sem os valores
+
+Colar as variáveis no arquivo '.env.example'
+```
+# Definição da porta do servidos express
+PORT = 
+
+# Variáveis de conexão com banco
+DB_HOST =
+DB_USER =
+DB_PASSWORD = 
+DB_DATABASE =
+DB_PORT = 
+```
+* Por padrão o pacote mysql2, espera conexão do banco na porta 3306
+* Se o MySQL não foi instalado na porta 3306, precisamos informar a porta do MySQL no arquivo '.env' e recuperar no arquivo "db.js" para acessar o banco
+```
+
 informar arquivos e pastas no .gitignore
 ```
 node_modules
@@ -65,10 +88,52 @@ const PORT = app.get('port');
 app.listen(PORT, () => console.log(`Running at port ${PORT}`))
 ```
 
-Criar comando para o servidor
+Criar arquivo server.js na pasta src
+```
+touch src/server.js
+```
+* Arquivo responsável por configurar a aplicação 
+
+Colar o código de configuração no arquivo 'app.js'
+```
+// Importar pacote do express
+const express = require('express');
+
+// Instanciar o express na variavel app
+const app = express();
+app.use(express.json());
+
+// Importar as rotas para serem executadas na aplicação
+const crudRouter = require('./routes/crudRouter');
+// Importar as rotas para serem executadas na aplicação
+const alunosRouter = require('./routes/alunosRouter');
+
+// Importar o pacote detenv
+const dotenv = require('dotenv').config();
+
+// HABILITAR A UTILIZAÇÃO DO CRUDROUTER
+app.use('/api', crudRouter);
+// HABILITAR A UTILIZAÇÃO DO CRUDROUTER
+app.use('/api', alunosRouter);
+
+// Setar a porta do servidor, a partir do arquivo .env
+app.set('port', process.env.PORT);
+
+// Exportar as configura ções do app para outros arquivos acessarem
+module.exports = app;
+```
+
+Criar comando para rodar o servidor no arquivo 'packege.json'
 ```
 "start":"nodemon src/server.js"
 ```
+* Substituir o comando "test" dentro da chave scripts pelo comando start acima
+* Este comando é responsável por rodar a API
+
+Após esta configuração o arquivo 'packege.json' deve estar conforme a imagem abaixo
+
+<img src="./imagens/packege_json.png">
+
 
 Rodar o comando no terminal com GitBash
 ```
