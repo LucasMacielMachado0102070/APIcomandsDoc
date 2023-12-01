@@ -48,6 +48,7 @@ Colar as variáveis no arquivo '.env.example'
 # Definição da porta do servidos express
 ```
 PORT = 
+```
 
 # Variáveis de conexão com banco
 ```
