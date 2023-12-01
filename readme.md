@@ -49,11 +49,11 @@ Colar as variáveis no arquivo '.env.example'
 PORT = 
 
 # Variáveis de conexão com banco
+```
 DB_HOST =
 DB_USER =
 DB_PASSWORD = 
 DB_DATABASE =
-DB_PORT = 
 ```
 * Por padrão o pacote mysql2, espera conexão do banco na porta 3306
 * Se o MySQL não foi instalado na porta 3306, precisamos informar a porta do MySQL no arquivo '.env' e recuperar no arquivo "db.js" para acessar o banco
